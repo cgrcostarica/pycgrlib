@@ -1062,31 +1062,6 @@ def generar_nombre(sexo=None, nombre_compuesto=False):
 	sexo con o sin nombre compuesto.
 	"""
 
-	# Obtener dos apellidos aleatorios de la lista de apellidos
-	apellido1 = apellidos[r.randint(0, len(apellidos)-1)]
-	apellido2 = apellidos[r.randint(0, len(apellidos)-1)]
-
-	# Generar nombre femenino
-	if sexo.lower() == "f":
-		if not nombre_compuesto:
-			nombre = nombres_femeninos[r.randint(0, len(nombres_femeninos)-1)]
-		else:
-			# Concatenar dos nombres femeninos
-			nombre = nombres_femeninos[r.randint(0, len(
-                nombres_femeninos)-1)] + ' ' + nombres_femeninos[r.randint(0, len(nombres_femeninos)-1)]
-		return nombre + " " + apellido1 + " " + apellido2
-
-	# Generar nombre msaculino
-	if sexo.lower() == "m":
-		if not nombre_compuesto:
-			nombre = nombres_masculinos[r.randint(
-                0, len(nombres_masculinos)-1)]
-		else:
-			# Concatenar dos nombres masculinos
-			nombre = nombres_masculinos[r.randint(0, len(
-                nombres_masculinos)-1)] + ' ' + nombres_masculinos[r.randint(0, len(nombres_masculinos)-1)]
-		return nombre + " " + apellido1 + " " + apellido2
-
 	# Si no se especifica el sexo, se genera una persona de sexo aleatorio, con nombre compuesto o no.
 	if sexo == None:
 		# Elegir una opción aleatoria
@@ -1099,6 +1074,32 @@ def generar_nombre(sexo=None, nombre_compuesto=False):
 			return generar_nombre(sexo='m', nombre_compuesto=True)
 		if opt == 3:
 			return generar_nombre(sexo='f', nombre_compuesto=True)
+	else:
+
+		# Obtener dos apellidos aleatorios de la lista de apellidos
+		apellido1 = apellidos[r.randint(0, len(apellidos)-1)]
+		apellido2 = apellidos[r.randint(0, len(apellidos)-1)]
+
+		# Generar nombre femenino
+		if sexo.lower() == "f" or sexo.lower() == "F":
+			if not nombre_compuesto:
+				nombre = nombres_femeninos[r.randint(0, len(nombres_femeninos)-1)]
+			else:
+				# Concatenar dos nombres femeninos
+				nombre = nombres_femeninos[r.randint(0, len(
+					nombres_femeninos)-1)] + ' ' + nombres_femeninos[r.randint(0, len(nombres_femeninos)-1)]
+			return nombre + " " + apellido1 + " " + apellido2
+
+		# Generar nombre masculino
+		if sexo.lower() == "m" or sexo.lower() == "M":
+			if not nombre_compuesto:
+				nombre = nombres_masculinos[r.randint(
+					0, len(nombres_masculinos)-1)]
+			else:
+				# Concatenar dos nombres masculinos
+				nombre = nombres_masculinos[r.randint(0, len(
+					nombres_masculinos)-1)] + ' ' + nombres_masculinos[r.randint(0, len(nombres_masculinos)-1)]
+			return nombre + " " + apellido1 + " " + apellido2
 
 
 def generar_cedula():
