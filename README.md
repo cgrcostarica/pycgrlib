@@ -1,5 +1,7 @@
 # pycgrlib
-Libreria con funciones Python
+Libreria de funciones para uso de herramientas en la Contraloria General de la Republica (CGR)
+
+Version actual: 0.1.2
 
 ## Uso
 
