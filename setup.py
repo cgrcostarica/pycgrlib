@@ -4,7 +4,7 @@ setup(
     name='pycgrlib',
     version='0.1.1',
     url='https://github.com/cgrcr/pycgrlib.git',
-    description='Biblioteca de funciones útiles de Python para uso de la CGR',
+    description='Libreria de funciones para uso de herramientas en la Contraloria General de la Republica (CGR)',
     author='Mario Zamora Madriz',
     author_email='mario.andres.zamora@cgr.go.cr',
     package_dir = {"": "src"},

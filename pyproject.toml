@@ -1,8 +1,6 @@
-[tool.poetry]
-name = "pycgrlib"
-version = "0.1.1"
-description = "Biblioteca de funciones útiles de Python para uso de la CGR"
-authors = ["Mario Zamora Madriz <mario.andres.zamora@cgr.go.cr>"]
-
-[tool.poetry.dependencies]
-python = "^3.10"
+[build-system]
+requires = [
+    "setuptools>=42",
+    "wheel"
+]
+build-backend = "setuptools.build_meta"
