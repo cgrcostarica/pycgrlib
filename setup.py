@@ -10,6 +10,6 @@ setup(
     author_email='mario.andres.zamora@cgr.go.cr',
     package_dir = {"": "src"},
     packages=find_packages(),
-    install_requires=['pandas'],
+    install_requires=['pandas','pyodbc'],
 )
 
