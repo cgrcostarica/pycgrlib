@@ -1118,40 +1118,43 @@ def generar_cedula():
 
 
 def generar_telefono(tipo=None):
+	"""
+	Devuelve un numero de telefono generado aleatoreamente, si el tipo es 'c' es celular, y 'f' es telefono fijo
+	"""
 	# Verifica si tipo es igual a "c" y genera un número de teléfono celular
-    if tipo == 'c':
-        return '8' + str(r.randint(3, 9)) + str(r.randint(0, 99)).zfill(2) + "-" + str(r.randint(0, 9999)).zfill(4)
+	if tipo == 'c':
+		return '8' + str(r.randint(3, 9)) + str(r.randint(0, 99)).zfill(2) + "-" + str(r.randint(0, 9999)).zfill(4)
 
 	# Verifica si tipo es igual a "f" y genera un número de teléfono fijo
-    if tipo == 'f':
-        return '2' + str(r.randint(3, 9)) + str(r.randint(0, 99)).zfill(2) + "-" + str(r.randint(0, 9999)).zfill(4)
+	if tipo == 'f':
+		return '2' + str(r.randint(3, 9)) + str(r.randint(0, 99)).zfill(2) + "-" + str(r.randint(0, 9999)).zfill(4)
 
     # Si tipo es None, se genera un número de teléfono aleatoriamente entre celular y fijo
-    if tipo == None:
-        random = r.randint(0, 1)
-        if random == 0:
-            return generar_telefono('c')
-        else:
-            return generar_telefono('f')
+	if tipo == None:
+		random = r.randint(0, 1)
+		if random == 0:
+			return generar_telefono('c')
+		else:
+			return generar_telefono('f')
 
 
 def generar_provincia():
 	"""
-	Devuelve una provincia de la lista de provincias disponibles
+	Devuelve una provincia aleatoria de la lista de provincias disponibles
 	"""
 	return r.choice(get_provincias())
 
 
 def generar_canton(provincia):
 	"""
-	Devuelve un cantón de la lista de cantones disponibles
+	Devuelve un cantón aleatorio de la lista de cantones disponibles
 	"""
 	return r.choice(get_cantones(provincia))
 
 
 def generar_distrito(provincia, canton):
 	"""
-	Devuelve un distrito de la lista de distritos disponibles
+	Devuelve un distrito aleatorio de la lista de distritos disponibles
 	"""
 	return r.choice(get_distritos(provincia, canton))
 
@@ -1164,12 +1167,13 @@ def generar_coordinada():
 	return r.choice(coordenadas)
 
 
-def generar_direccion():
+def generar_direccion(provincia=None, canton=None):
 	"""
 	Devuelve una dirección aleatoria en formato de texto utilizando funciones auxiliares generar_coordinada, generar_provincia, 
 	generar_canton y generar_distrito. La dirección generada incluye la cantidad de metros en bloques de 100 de la ubicación,
 	la coordenada de la ubicación (Norte, Sur, Este, Oeste), el tipo de lugar (elegido de la lista lugares), el nombre del
 	lugar (elegido de la lista nombre_lugares), el distrito, el cantón y la provincia.
+	Puede recibir la provincia y canton para generar la dirección.
 	"""
     # Genera un número aleatorio entre 100 y 800 para la cantidad de metros de una ubicación
 	cantidad = r.randint(100, 800)
@@ -1178,14 +1182,20 @@ def generar_direccion():
 	metros = str(cantidad - (cantidad % 100))
     # Llama a la función generar_coordinada() para obtener una coordenada (Norte, Sur, Este, Oeste)
 	coordenada = generar_coordinada()
+
     # Llama a la función generar_provincia() para obtener una provincia
-	provincia = generar_provincia()
+	if provincia is None:
+		provincia = generar_provincia()
+
+	if canton is None:
     # Llama a la función generar_canton() con la provincia obtenida como argumento para obtener un cantón
-	canton = generar_canton(provincia)
+		canton = generar_canton(provincia)
+
 	# Llama a la función generar_distrito() con la provincia y cantón obtenidos como argumentos para obtener un distrito
 	distrito = generar_distrito(provincia, canton)
     # Devuelve la dirección generada como una cadena de caracteres con la siguiente estructura:
-    # metros + " " + coordenada + " " + lugar elegido al azar de la lista lugares + " " + nombre de lugar elegido al azar de la lista nombre_lugares + ", " + distrito + ", " + canton + ", " + provincia
+    # metros + " " + coordenada + " " + lugar elegido al azar de la lista lugares + " " + 
+	# nombre de lugar elegido al azar de la lista nombre_lugares + ", " + distrito + ", " + canton + ", " + provincia
 	return metros + " " + coordenada + " " + r.choice(lugares) + " " + r.choice(nombre_lugares) + ", " + distrito + ", " + canton + ", " + provincia
 
 
@@ -1213,14 +1223,14 @@ def generar_persona(p_cantidad=1, p_sexo=None):
 		nombre = generar_nombre(p_sexo)
         # Genera un número de cédula aleatorio
 		cedula = generar_cedula()
-        # Genera una dirección
-		direccion = generar_direccion()
         # Genera una provincia
 		provincia = generar_provincia()
         # Genera un cantón basado en la provincia generada
 		canton = generar_canton(provincia)
         # Genera un distrito basado en la provincia y cantón generados
 		distrito = generar_distrito(provincia, canton)
+		# Genera una dirección
+		direccion = generar_direccion(provincia=provincia,canton=canton)
         # Genera un salario
 		salario = generar_salario()
         # Genera un número de teléfono
