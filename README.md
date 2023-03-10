@@ -34,6 +34,17 @@ pip install .
 | generar_salario() | Devuelve un salario aleatorio entre 330,000 y 2,500,000 colones|
 | generar_persona() | Devuelve una lista de datos aleatorios para una persona especificada por la cantidad en el parámetro "p_cantidad". La información generada incluye un nombre, un número de cédula, una dirección, una provincia, un cantón, un distrito, un salario y un número de teléfono. También se proporciona un género opcional "p_sexo" para la generación del nombre. La función devuelve la lista completa de información generada para cada persona.|
 
+# Ejemplo de uso
+
+```
+from pycgrlib import generador_datos as gd 
+import pandas as pd
+
+personas = gd.generar_persona(50)
+data = pd.DataFrame(personas, columns=gd.columnas)
+data.to_csv("salida.csv",sep="|", encoding='UTF-8', index=False)
+```
+
 ## Changelog
 
 Puede ver el registro completo de cambios en el archivo [CHANGELOG.md](CHANGELOG.md)
