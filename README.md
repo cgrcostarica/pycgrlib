@@ -6,7 +6,8 @@ Libreria de funciones para uso de herramientas en la Contraloria General de la R
 ```
 git clone https://github.com/cgrcr/pycgrlib.git
 cd pycgrlib
-python -m build
+python3 -m pip install --upgrade build
+python3 -m build
 pip install .
 ```
 
